@@ -1,58 +1,126 @@
 "use client";
 
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableColumn,
-  TableHeader,
-  TableRow,
-} from "@nextui-org/react";
+import { Card, CardBody, Image } from "@nextui-org/react";
+import Link from "next/link";
+
+const months = [
+  "January",
+  "February",
+  "March",
+  "April",
+  "May",
+  "June",
+  "July",
+  "August",
+  "September",
+  "October",
+  "November",
+  "December",
+];
 
 export default function ProfileView({ data }: { data: any }) {
+  const formatDate = (dateString: string): string => {
+    const date = new Date(dateString);
+    const selectedMonthName = months[date.getUTCMonth()];
+    return `${date.getUTCDate()} ${selectedMonthName} ${date.getUTCFullYear()}`;
+  };
+
   return (
-    <Table
-      aria-label={`${data.login} Profile Info`}
-      className="p-4 overflow-scroll flex-1"
+    <Card
+      isBlurred
+      className="border-none bg-background/60 dark:bg-default-100/50 max-w-[610px] m-auto"
+      shadow="sm"
     >
-      <TableHeader>
-        <TableColumn>Property</TableColumn>
-        <TableColumn>value</TableColumn>
-      </TableHeader>
-      <TableBody>
-        <TableRow key="username">
-          <TableCell>username: </TableCell>
-          <TableCell>{data.login}</TableCell>
-        </TableRow>
-        <TableRow key="2">
-          <TableCell>Name:</TableCell>
-          <TableCell>{data.name}</TableCell>
-        </TableRow>
-        <TableRow key="3">
-          <TableCell>Blog:</TableCell>
-          <TableCell>{data.blog}</TableCell>
-        </TableRow>
-        <TableRow key="4">
-          <TableCell>Email:</TableCell>
-          <TableCell>{data.email}</TableCell>
-        </TableRow>
-        <TableRow key="4">
-          <TableCell>Followers:</TableCell>
-          <TableCell>{data.followers}</TableCell>
-        </TableRow>
-        <TableRow key="4">
-          <TableCell>Following:</TableCell>
-          <TableCell>{data.following}</TableCell>
-        </TableRow>
-        <TableRow key="4">
-          <TableCell>Created at:</TableCell>
-          <TableCell>{new Date(data.created_at).toUTCString()}</TableCell>
-        </TableRow>
-        <TableRow key="4">
-          <TableCell>Updated at:</TableCell>
-          <TableCell>{new Date(data.updated_at).toUTCString()}</TableCell>
-        </TableRow>
-      </TableBody>
-    </Table>
+      <CardBody>
+        <div className="grid grid-cols-6 md:grid-cols-12 gap-6 md:gap-4 items-center justify-center">
+          <div className="relative col-span-6 md:col-span-4">
+            <Image
+              alt="Album cover"
+              className="object-cover"
+              height={200}
+              shadow="md"
+              src={data.avatar_url}
+              width="100%"
+            />
+          </div>
+
+          <div className="flex flex-col col-span-6 md:col-span-8">
+            <div className="flex justify-between items-start">
+              <div className="flex flex-col gap-0">
+                <p className="text-small text-foreground/50 mt-2">
+                  @{data.login}
+                </p>
+                <Link href={data.html_url} target="_blank">
+                  <h1 className="text-large font-medium">{data.name}</h1>
+                </Link>
+                {data.bio ? (
+                  <p className="text-small text-foreground/80 mb-1">
+                    {data.bio}
+                  </p>
+                ) : null}
+
+                <p className="text-small text-foreground/50 mb-2">
+                  member since {formatDate(data.created_at)}
+                </p>
+
+                {data.location ? (
+                  <p className="text-small text-foreground/80">
+                    {data.location}
+                  </p>
+                ) : null}
+                <p className="text-small text-foreground/80">E: {data.email}</p>
+                <p className="text-small text-foreground/80">W: {data.blog}</p>
+              </div>
+              {/* <Link href={data.html_url} target="_blank"> */}
+              {/* <Button
+                    isIconOnly
+                    className="text-default-900/60 data-[hover]:bg-foreground/10 -translate-y-2 translate-x-2"
+                    radius="full"
+                    variant="light"
+                    // onPress={() => setLiked((v) => !v)}
+                  > */}
+              {/* Github */}
+              {/* <HeartIcon
+                    className={liked ? "[&>path]:stroke-transparent" : ""}
+                    fill={liked ? "currentColor" : "none"}
+                  /> */}
+              {/* </Button> */}
+              {/* </Link> */}
+            </div>
+
+            <div className="flex flex-col mt-3 gap-1">
+              {/* <Slider
+                  aria-label="Music progress"
+                  classNames={{
+                    track: "bg-default-500/30",
+                    thumb: "w-2 h-2 after:w-2 after:h-2 after:bg-foreground",
+                  }}
+                  color="foreground"
+                  defaultValue={33}
+                  size="sm"
+                /> */}
+              <div className="flex-column justify-between">
+                <p className="text-small">Followers: {data.followers}</p>
+                <p className="text-small">Followings: {data.following}</p>
+              </div>
+            </div>
+            {/* 
+              <div className="flex w-full items-center justify-center">
+                <Link href={data.blog ? data.blog : undefined} target="_blank">
+                  <Button
+                    // isIconOnly
+                    className="w-auto h-auto data-[hover]:bg-foreground/10"
+                    radius="full"
+                    variant="light"
+                  >
+                    site
+                    <PauseCircleIcon size={54} />
+                  </Button>
+                </Link>
+              </div> */}
+          </div>
+        </div>
+      </CardBody>
+    </Card>
   );
 }
