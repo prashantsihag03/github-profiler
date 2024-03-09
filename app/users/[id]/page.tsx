@@ -20,7 +20,7 @@ export default async function Page({ params }: { params: { id: string } }) {
   const id = params.id;
 
   const octokit = new Octokit({
-    auth: "blah",
+    auth: process.env.GITHUB_PERSONAL_TOKEN,
   });
 
   const {
