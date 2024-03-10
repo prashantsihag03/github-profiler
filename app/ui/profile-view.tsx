@@ -81,19 +81,23 @@ export default function ProfileView({
                       {data.location}
                     </p>
                   ) : null}
-                  <p className="text-small text-foreground/80 flex items-center">
-                    <MdEmail className="mr-1" /> {data.email}
-                  </p>
-                  <p className="text-small text-foreground/80 flex items-center">
-                    <FaLink className="mr-1" />
-                    <Link
-                      href={data.blog}
-                      target="_blank"
-                      className="hover:underline"
-                    >
-                      {data.blog}
-                    </Link>
-                  </p>
+                  {data.email ? (
+                    <p className="text-small text-foreground/80 flex items-center">
+                      <MdEmail className="mr-1" /> {data.email}
+                    </p>
+                  ) : null}
+                  {data.blog ? (
+                    <p className="text-small text-foreground/80 flex items-center">
+                      <FaLink className="mr-1" />
+                      <Link
+                        href={data.blog}
+                        target="_blank"
+                        className="hover:underline"
+                      >
+                        {data.blog}
+                      </Link>
+                    </p>
+                  ) : null}
                 </div>
                 {/* <Link href={data.html_url} target="_blank"> */}
                 {/* <Button
