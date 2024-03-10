@@ -31,11 +31,15 @@ export default async function Page({ params }: { params: { id: string } }) {
   const { data: repoData } = await octokit.rest.repos.listForUser({
     username: id,
     sort: "pushed",
+    per_page: 100,
   });
 
   return (
     <main className="dark text-foreground bg-background h-dvh p-8 flex-col justify-around overflow-hidden">
-      <ProfileView data={data} />
+      <ProfileView
+        data={data}
+        totalRepos={repoData.length === 100 ? "~100" : `${repoData.length}`}
+      />
       <RepoList data={repoData} />
     </main>
   );
