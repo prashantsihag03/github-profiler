@@ -37,6 +37,24 @@ export default async function Page({ params }: { params: { id: string } }) {
     languageCount[repo.language] = languageCount[repo.language] + 1;
   });
 
+  const repoStars: LangData = {};
+
+  repoData.forEach((repo, index) => {
+    if (repo.stargazers_count == null) return;
+    repoStars[repo.name] = repo.stargazers_count;
+  });
+
+  const sortedObj = Object.fromEntries(
+    Object.entries(repoStars).sort((a, b) => b[1] - a[1])
+  );
+
+  const topFiveRepoStar = Object.keys(sortedObj).slice(0, 5);
+
+  const newObject: LangData = {};
+  topFiveRepoStar.forEach((val) => {
+    newObject[val] = sortedObj[val];
+  });
+
   return (
     <main className="dark text-foreground bg-background h-dvh p-8 flex-col justify-around overflow-hidden">
       <div className="flex max-w-[1600px] flex-wrap m-auto">
@@ -44,10 +62,15 @@ export default async function Page({ params }: { params: { id: string } }) {
           data={data}
           totalRepos={repoData.length === 100 ? "~100" : `${repoData.length}`}
         />
-        <Charts langData={languageCount} />
-        <Charts langData={languageCount} />
-        <Charts langData={languageCount} />
-        {/* <Charts langData={languageCount} /> */}
+        <Charts
+          langData={languageCount}
+          title="No. of repositories by languages: "
+        />
+        <Charts
+          langData={newObject}
+          title="Top five repositories by no. of stars: "
+        />
+        <Charts langData={languageCount} title="Languages: " />
       </div>
       <RepoList data={repoData} />
     </main>

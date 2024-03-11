@@ -18,7 +18,13 @@ export interface LangData {
   [key: string]: number;
 }
 
-export default function Charts({ langData }: { langData: LangData }) {
+export default function Charts({
+  langData,
+  title,
+}: {
+  langData: LangData;
+  title: string;
+}) {
   const langChartData: ChartData<"doughnut", number[], unknown> = {
     labels: Object.keys(langData),
     datasets: [
@@ -51,7 +57,7 @@ export default function Charts({ langData }: { langData: LangData }) {
   return (
     <Card className="flex-1 max-h-[600px] min-w-[300px] h-auto w-auto m-2 ">
       <CardBody className="flex-col items-center justify-center">
-        <p className="w-full text-center">LANGUAGES:</p>
+        <p className="w-full text-center">{title}</p>
         <Doughnut
           data={langChartData}
           options={{
