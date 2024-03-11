@@ -1,14 +1,6 @@
+import Charts, { LangData } from "@/app/ui/charts";
 import ProfileView from "@/app/ui/profile-view";
 import RepoList from "@/app/ui/repo-list";
-import {
-  Button,
-  Card,
-  CardBody,
-  CardFooter,
-  Image,
-  Link,
-  Slider,
-} from "@nextui-org/react";
 import { Metadata } from "next";
 import { Octokit } from "octokit";
 
@@ -34,12 +26,29 @@ export default async function Page({ params }: { params: { id: string } }) {
     per_page: 100,
   });
 
+  const languageCount: LangData = {};
+
+  repoData.forEach((repo, index) => {
+    if (repo.language == null) return;
+    if (languageCount[repo.language] == null) {
+      languageCount[repo.language] = 1;
+      return;
+    }
+    languageCount[repo.language] = languageCount[repo.language] + 1;
+  });
+
   return (
     <main className="dark text-foreground bg-background h-dvh p-8 flex-col justify-around overflow-hidden">
-      <ProfileView
-        data={data}
-        totalRepos={repoData.length === 100 ? "~100" : `${repoData.length}`}
-      />
+      <div className="flex max-w-[1600px] flex-wrap m-auto">
+        <ProfileView
+          data={data}
+          totalRepos={repoData.length === 100 ? "~100" : `${repoData.length}`}
+        />
+        <Charts langData={languageCount} />
+        <Charts langData={languageCount} />
+        <Charts langData={languageCount} />
+        {/* <Charts langData={languageCount} /> */}
+      </div>
       <RepoList data={repoData} />
     </main>
   );
