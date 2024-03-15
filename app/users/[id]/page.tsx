@@ -147,10 +147,10 @@ export default async function Page({ params }: { params: { id: string } }) {
           title="Top five repositories by no. of stars: "
         />
       </div>
-      <div className="flex max-w-[1600px] flex-wrap m-auto gap-2">
-        <Card className="box-border p-0 bg-background flex-1 flex-row items-center justify-center max-h-[600px] min-w-[150px] h-auto w-auto m-20 ">
-          <CardBody className="flex-col bg-background items-center justify-center">
-            <p className="w-full text-center text-3xl">
+      <div className="flex max-w-[1600px] w-full flex-wrap m-auto gap-2">
+        <Card className="box-border p-0 w-full g-background flex-1 flex-row items-center justify-center h-auto w-auto mt-24 mb-24 ">
+          <CardBody className="flex-col w-full bg-background items-center justify-center">
+            <p className="w-full text-center text-lg lg:text-3xl m-0 p-0">
               So far this year,{" "}
               <span className="text-blue-500">{data.name?.split(" ")[0]}</span>{" "}
               has made <span className="text-blue-500">{totalCommits}</span>{" "}

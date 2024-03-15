@@ -55,7 +55,7 @@ export default function Charts({
   };
 
   return (
-    <Card className="flex-1 min-w-[400px] bg-background/60 dark:bg-default-100/30 min-h-[400px] flex-wrap h-auto w-auto border-box">
+    <Card className="flex-1 min-w-[300px] bg-background/60 dark:bg-default-100/30 min-h-[400px] flex-wrap h-auto w-auto border-box">
       <CardBody className="flex flex-col justify-center items-center h-[100%] w-[100%]">
         <p className="w-full text-center max-h-[10%] pb-2">{title}</p>
         <div className="w-[100%] h-[80%] flex justify-center items-center">

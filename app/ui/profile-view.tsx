@@ -37,7 +37,7 @@ export default function ProfileView({
   return (
     <Card
       isBlurred
-      className="flex-1 max-w-[300px] m-auto border-none bg-background/60 dark:bg-default-100/30"
+      className="flex-1 max-w-[500px] min-w-[300px] m-auto border-none bg-background/60 dark:bg-default-100/30"
       shadow="sm"
     >
       <CardBody className="w-full">
@@ -53,7 +53,7 @@ export default function ProfileView({
             />
           </div>
 
-          <div className="flex-1 tracking-wide w-full flex-col justify-center items-center">
+          <div className="flex-1 tracking-wide w-full m-auto max-w-[300px] flex-col justify-center items-center">
             <div className="flex flex-col w-full justify-between items-center">
               <div className="flex flex-col gap-0 max-w-[400px] w-full items-center">
                 <p className="text-small text-foreground/50">@{data.login}</p>

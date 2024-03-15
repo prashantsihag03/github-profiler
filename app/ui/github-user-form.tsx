@@ -14,13 +14,13 @@ export default function GithubUserForm() {
 
   return (
     <form
-      className="w-3/6 flex flex-row justify-center items-center"
+      className="w-full max-w-[800px] min-h-[300px] min-w-[300px] flex flex-wrap flex-row justify-center items-center"
       onSubmit={handleSubmit}
     >
       <input
         type="text"
-        className="p-6 bg-white bg-opacity-5 text-center rounded-sm grey-200 z-50 w-5/6"
-        placeholder="Enter Github Username and press enter"
+        className="p-6 bg-white bg-opacity-5 text-center text-sm md:text-base lg:text-base rounded-sm grey-200 z-50 w-[100%] m-0"
+        placeholder="Enter Github Username and hit enter"
         value={username}
         onChange={(e) => {
           setUsername(e.target.value);
