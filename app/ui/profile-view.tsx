@@ -37,15 +37,15 @@ export default function ProfileView({
   return (
     <Card
       isBlurred
-      className="border-none bg-background/60 dark:bg-default-100/50 max-w-[300px] w-auto m-2"
+      className="flex-1 max-w-[300px] m-auto border-none bg-background/60 dark:bg-default-100/30"
       shadow="sm"
     >
       <CardBody className="w-full">
         <div className="flex-col flex-wrap justify-center items-center w-full">
-          <div className="relative w-full">
+          <div className="relative w-full flex justify-center items-center">
             <Image
               alt="Album cover"
-              className="object-cover"
+              className="object-cover max-w-[300px]"
               height={200}
               shadow="md"
               src={data.avatar_url}
@@ -53,12 +53,10 @@ export default function ProfileView({
             />
           </div>
 
-          <div className="flex-1 m-2 tracking-wide">
-            <div className="flex justify-between items-center">
-              <div className="flex flex-col gap-0">
-                <p className="text-small text-foreground/50 mt-2">
-                  @{data.login}
-                </p>
+          <div className="flex-1 tracking-wide w-full flex-col justify-center items-center">
+            <div className="flex flex-col w-full justify-between items-center">
+              <div className="flex flex-col gap-0 max-w-[400px] w-full items-center">
+                <p className="text-small text-foreground/50">@{data.login}</p>
                 <Link href={data.html_url} target="_blank">
                   <h1 className="text-large font-medium text-blue-500">
                     {data.name}
@@ -101,7 +99,7 @@ export default function ProfileView({
             </div>
 
             <div className="flex flex-col mt-3 gap-1">
-              <div className="flex-column justify-between items-center">
+              <div className="flex-col justify-between items-center">
                 <p className="text-small p-2 mb-2 bg-background/60 text-center">
                   <b>Repositories</b>: {totalRepos}
                 </p>

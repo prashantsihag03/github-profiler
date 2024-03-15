@@ -55,28 +55,38 @@ export default function Charts({
   };
 
   return (
-    <Card className="flex-1 max-h-[600px] min-w-[300px] h-auto w-auto m-2 ">
-      <CardBody className="flex-col items-center justify-center">
-        <p className="w-full text-center">{title}</p>
-        <Doughnut
-          data={langChartData}
-          options={{
-            color: "white",
-            borderColor: "gray",
-            layout: {
-              padding: 10,
-            },
-            plugins: {
-              legend: {
-                display: true,
-                align: "center",
+    <Card className="flex-1 min-w-[400px] bg-background/60 dark:bg-default-100/30 min-h-[400px] flex-wrap h-auto w-auto border-box">
+      <CardBody className="flex flex-col justify-center items-center h-[100%] w-[100%]">
+        <p className="w-full text-center max-h-[10%] pb-2">{title}</p>
+        <div className="w-[100%] h-[80%] flex justify-center items-center">
+          <Doughnut
+            data={langChartData}
+            style={{ boxSizing: "border-box" }}
+            width={"100%"}
+            height={"80%"}
+            options={{
+              color: "white",
+              borderColor: "gray",
+              layout: {
+                autoPadding: true,
               },
-              colors: {
-                forceOverride: true,
+              plugins: {
+                legend: {
+                  labels: {
+                    padding: 15,
+                  },
+                  display: true,
+                  align: "center",
+                  fullSize: true,
+                  position: "bottom",
+                },
+                colors: {
+                  forceOverride: true,
+                },
               },
-            },
-          }}
-        />
+            }}
+          />
+        </div>
       </CardBody>
     </Card>
   );
