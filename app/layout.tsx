@@ -18,7 +18,10 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={inter.className} style={{ backgroundColor: "black" }}>
+      <body
+        className={`${inter.className} relative`}
+        style={{ backgroundColor: "black" }}
+      >
         <Providers>{children}</Providers>
       </body>
     </html>

@@ -8,48 +8,33 @@ import {
   TableHeader,
   TableRow,
 } from "@nextui-org/react";
-
-const findMaxStarRepo = (data: any[]) => {
-  let max = 0;
-  let maxStarRepo: any[] = [];
-  data.forEach((repo) => {
-    if (repo.stargazers_count > max) {
-      max = repo.stargazers_count;
-      maxStarRepo = [repo];
-    }
-    if (repo.stargazers_count == max) {
-      max = repo.stargazers_count;
-      maxStarRepo.push(repo);
-    }
-  });
-
-  return {
-    max: max,
-    repos: maxStarRepo,
-  };
-};
+import Link from "next/link";
 
 export default function RepoList({ data }: { data: unknown[] }) {
   return (
     <Table
       aria-label={`Repositories`}
-      className="p-4 overflow-auto flex-1 h-96"
+      className="pt-2 overflow-auto flex-1 h-96"
       isHeaderSticky={true}
     >
       <TableHeader>
         <TableColumn>Repo Name</TableColumn>
-        <TableColumn>Stars</TableColumn>
         <TableColumn>Last pushed at</TableColumn>
-        <TableColumn>Link</TableColumn>
       </TableHeader>
       <TableBody>
         {data.map((repo: any) => {
+          const datePushed = new Date(repo.pushed_at);
           return (
             <TableRow key="username">
-              <TableCell>{repo.name} </TableCell>
-              <TableCell>{repo.stargazers_count}</TableCell>
-              <TableCell>{new Date(repo.pushed_at).toUTCString()}</TableCell>
-              <TableCell>{repo.html_url}</TableCell>
+              <TableCell>
+                <Link
+                  href={repo.html_url}
+                  className="underline hover:text-blue-500"
+                >
+                  {repo.name}
+                </Link>
+              </TableCell>
+              <TableCell>{`${datePushed.getUTCDate()}/${datePushed.getUTCMonth()}/${datePushed.getUTCFullYear()}`}</TableCell>
             </TableRow>
           );
         })}
