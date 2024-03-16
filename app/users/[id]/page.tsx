@@ -1,9 +1,12 @@
 import Charts, { LangData } from "@/app/ui/charts";
 import ProfileView from "@/app/ui/profile-view";
 import RepoList from "@/app/ui/repo-list";
-import { Card, CardBody } from "@nextui-org/react";
+import { Card, CardBody, Divider } from "@nextui-org/react";
 import { Metadata } from "next";
+import Link from "next/link";
 import { Octokit } from "octokit";
+import { MdEmail } from "react-icons/md";
+import { FaLink } from "react-icons/fa6";
 
 export const metadata: Metadata = {
   title: "Profile View",
@@ -101,8 +104,6 @@ export default async function Page({ params }: { params: { id: string } }) {
     newObject[val] = sortedObj[val];
   });
 
-  let totalCount = 0;
-
   const reposLastPushedThisYear = repoData.filter((repo) => {
     const pushedAt = repo.pushed_at;
     const today = new Date();
@@ -167,6 +168,60 @@ export default async function Page({ params }: { params: { id: string } }) {
         All repositories:
       </p>
       <RepoList data={repoData} />
+      <div className="flex max-w-[1600px] w-full flex-wrap m-auto gap-2">
+        <Card className="box-border p-0 w-full g-background flex-1 flex-row items-center justify-center h-auto w-auto mt-24 mb-24 ">
+          <CardBody className="flex-col w-full bg-background items-center justify-center">
+            {data.email ? (
+              <p className="w-full text-center text-lg lg:text-2xl m-0 p-0 mb-10 flex flex-wrap justify-center items-center">
+                <MdEmail className="mr-1 text-blue-500" />
+                <span className="mr-1">
+                  Connect with {data.name?.split(" ")[0]} on
+                </span>
+                <span className="text-blue-500"> {`${data.email}`}</span>
+              </p>
+            ) : null}
+            {data.email ? (
+              <p className="w-full text-center text-lg lg:text-2xl m-0 p-0 flex flex-wrap justify-center items-center">
+                <FaLink className="mr-1 text-blue-500" />
+                <span className="mr-1">
+                  Check out {data.name?.split(" ")[0]}&apos;s blogs on
+                </span>
+                <span className="text-blue-500">{`${data.blog}`}</span>
+              </p>
+            ) : null}
+          </CardBody>
+        </Card>
+      </div>
+      <div className="w-[70%] m-auto flex flex-col justify-center items-center">
+        <Divider />
+        <p className="w-[85%] text-center text-base lg:text-base m-0 p-0 text-foreground/80 pt-1">
+          Built by{" "}
+          <span className="text-blue-300">
+            <Link href={"https://prashantsihag.com"}>Prashant Sihag</Link>
+          </span>{" "}
+          with{" "}
+          <span className="text-blue-300">
+            <Link href="https://nextjs.org/">Next.js</Link>
+          </span>
+          ,{" "}
+          <span className="text-blue-300">
+            <Link href="https://tailwindcss.com/">TailwindCSS</Link>
+          </span>
+          ,{" "}
+          <span className="text-blue-300">
+            <Link href="https://www.chartjs.org/">Chart.js</Link>
+          </span>
+          ,{" "}
+          <span className="text-blue-300">
+            <Link href="https://nextui.org/">NextUI</Link>
+          </span>{" "}
+          and{" "}
+          <span className="text-blue-300">
+            <Link href="https://github.com/octokit/octokit.js">Octokit.js</Link>
+          </span>
+          .
+        </p>
+      </div>
     </main>
   );
 }

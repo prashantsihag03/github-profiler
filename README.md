@@ -12,6 +12,7 @@ This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-opti
 - [TailwindCSS](https://tailwindcss.com/)
 - [Octokit.js](https://github.com/octokit/octokit.js)
 - [Chart.js](https://www.chartjs.org/)
+- [NextUI](https://nextui.org/)
 
 ## Pre-requisite
 
