@@ -31,7 +31,7 @@ export default function GithubUserForm() {
         <input
           type="text"
           disabled={disableInput}
-          className="p-6 bg-white bg-opacity-5 text-center text-sm md:text-base lg:text-base rounded-sm grey-200 z-40 w-[100%] m-0"
+          className="p-6 bg-white bg-opacity-5 text-center text-base md:text-base lg:text-base rounded-sm grey-200 z-40 w-[100%] m-0"
           placeholder="Enter Github Username and hit enter"
           value={username}
           onChange={(e) => {
