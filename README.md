@@ -1,6 +1,6 @@
 # Github Profiler
 
-An appealing visual of your Github profile that utilised Charts to display additional github statistics.
+An appealing visual of your Github profile that utilises charts to display additional github statistics.
 
 Built using Next.js, this web app takes a Github username and displays their Github profile with additional information and statistics in a visually appealing way.
 
