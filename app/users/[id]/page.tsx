@@ -182,7 +182,7 @@ export default async function Page({ params }: { params: { id: string } }) {
                 <span className="text-blue-500"> {`${data.email}`}</span>
               </p>
             ) : null}
-            {data.email ? (
+            {data.blog ? (
               <p className="w-full text-center text-lg lg:text-2xl m-0 p-0 flex flex-wrap justify-center items-center">
                 <FaLink className="mr-1 text-blue-500" />
                 <span className="mr-1">
