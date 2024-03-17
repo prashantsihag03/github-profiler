@@ -20,7 +20,7 @@ export default function GithubUserForm() {
   return (
     <>
       {spinner ? (
-        <div className="w-full h-full flex flex-row absolute top-0 left-0 z-50 justify-center items-center bg-background/80">
+        <div className="w-full h-dvh flex flex-row absolute top-0 left-0 z-50 justify-center items-center bg-background/80">
           <Spinner />
         </div>
       ) : null}

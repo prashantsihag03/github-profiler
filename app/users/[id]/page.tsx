@@ -7,6 +7,7 @@ import Link from "next/link";
 import { Octokit } from "octokit";
 import { MdEmail } from "react-icons/md";
 import { FaLink } from "react-icons/fa6";
+import { IoChevronBackOutline } from "react-icons/io5";
 
 export const metadata: Metadata = {
   title: "Profile View",
@@ -113,11 +114,6 @@ export default async function Page({ params }: { params: { id: string } }) {
     return false;
   });
 
-  console.log("Repos pushed at this year ?");
-  reposLastPushedThisYear.forEach((repo) => {
-    console.log(repo.name, " at ", new Date(repo.pushed_at!).getFullYear());
-  });
-
   let totalCommits = 0;
   for (let index = 0; index < reposLastPushedThisYear.length; index++) {
     const repo = reposLastPushedThisYear[index];
@@ -127,14 +123,20 @@ export default async function Page({ params }: { params: { id: string } }) {
       per_page: 100,
       since: `${new Date().getUTCFullYear()}-1-1`,
     });
-    console.log("Total commits in: ", repo.name, " are ", stats.length);
     totalCommits = totalCommits + stats.length;
   }
-  console.log(totalCommits);
 
   return (
     <main className="dark text-foreground bg-background h-dvh p-8 flex-col justify-around overflow-scroll">
-      <div className="flex max-w-[1600px] flex-wrap m-auto gap-2">
+      <div className="w-full flex flex-row justify-left items-center">
+        <Link href="/">
+          <IoChevronBackOutline className="text-xl" />
+        </Link>
+        <h1 className="inline-block text-xl">
+          {data.name?.split(" ")[0]}&apos;s Profile:{" "}
+        </h1>
+      </div>
+      <div className="flex max-w-[1600px] flex-wrap m-auto gap-4">
         <ProfileView
           data={data}
           totalRepos={repoData.length === 100 ? "~100" : `${repoData.length}`}
